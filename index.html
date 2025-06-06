@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Regex</title>
+</head>
+<body>
+    <main>
+        <section>
+            <form name="f1">
+                <label for="website">Strona internetowa:</label>
+                <input name="website" class="textInput" type="text" placeholder="Strona internetowa...">
+                <input class="submitInput" onclick="checkWebsite(); return false;" type="submit" value="Sprawdź poprawność">
+            </form>
+            <p id="output1"></p>
+        </section>
+        <section>
+            <form name="f2">
+                <label for="email">Email:</label>
+                <input name="email" class="textInput" type="text" placeholder="Email...">
+                <input class="submitInput" onclick="checkEmail(); return false;" type="submit" value="Sprawdź poprawność">
+            </form>
+            <p id="output2"></p>
+        </section>
+        <section>
+            <form name="f3">
+                <label for="searchText">Tekst:</label>
+                <textarea name="searchText" rows="5" placeholder="Tekst..."></textarea>
+                <label for="searchPhrase">Szukana fraza:</label>
+                <input name="searchPhrase" class="textInput" type="text" placeholder="Fraza..." required>
+                <input class="submitInput" onclick="findText(); return false;" type="submit" value="Sprawdź">
+            </form>
+            <p id="output3"></p>
+        </section>
+        <section>
+            <form name="f4">
+                <label for="searchText">Tekst:</label>
+                <textarea name="searchText" rows="5" placeholder="Tekst..."></textarea>
+                <label for="markPhrase">Fraza do wyróżnienia:</label>
+                <input name="markPhrase" class="textInput" type="text" placeholder="Fraza..." required>
+                <input class="submitInput" onclick="markText(); return false;" type="submit" value="Sprawdź">
+            </form>
+            <p id="output4"></p>
+        </section>
+    </main>
+    <footer>
+        Wiktor Jurek © 2025. Wszelkie prawa zastrzeżone
+    </footer>
+    
+    <script>
+        function checkWebsite() {
+            let website = document.f1.website.value;
+            const reg = /^www\.[a-z0-9]+(-[a-z0-9]+)*\.[a-z]{2,}$/i;
+            output = document.getElementById("output1");
+            if (reg.test(website)) {
+                output.innerHTML = "Podałeś poprawną stronę internetową";
+                output.style.color = "#48C23D"
+            }
+            else {
+                output.innerHTML = "Podałeś niepoprawną stronę internetową";
+                output.style.color = "#FF0000"
+            }
+        }
+        function checkEmail() {
+            let email = document.f2.email.value;
+            const reg = /^[a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[a-z0-9!#$%&'*+/=?^_`{|}~]+)*@[a-z0-9]+(-[a-z0-9]+)*\.[a-z]{2,}$/i;
+            output = document.getElementById("output2");
+            if (reg.test(email)) {
+                output.innerHTML = "Podałeś poprawny email";
+                output.style.color = "#48C23D"
+            }
+            else {
+                output.innerHTML = "Podałeś niepoprawny email";
+                output.style.color = "#FF0000"
+            }
+        }
+        function findText() {
+            let searchText = document.f3.searchText.value;
+            let searchPhrase = document.f3.searchPhrase.value;
+            const reg = new RegExp(`\\b${searchPhrase}\\b`, "gi");
+            let result = searchText.match(reg);
+            output = document.getElementById("output3");
+            if(result !== null)
+                output.innerHTML = `Podana fraza występuje w tekście ${result.length} razy`;
+            else
+                output.innerHTML = 'Podana fraza nie występuje w tekście';
+        }
+        function markText() {
+            let searchText = document.f4.searchText.value;
+            let markPhrase = document.f4.markPhrase.value;
+            const reg = new RegExp(`\\b${markPhrase}\\b`, "gi");
+            let result = searchText.replace(reg, `<span>${markPhrase}</span>`);
+            output = document.getElementById("output4");
+            output.innerHTML = result;
+        }
+    </script>
+</body>
+</html>
