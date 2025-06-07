@@ -36,7 +36,7 @@ input, textarea {
     color: #A7A7A7;
 }
 .submitInput {
-    background-color: #914FCA;
+    background-color: #d4ca34;
     color: #fff;
     padding: 8px 0px;
     transition: opacity 0.2s;
@@ -58,9 +58,11 @@ label {
 p {
     min-height: 21px;
     margin: 16px;
+    width: 400px; 
 }
 span {
-    background-color: #914FCA;
+    background-color: #f7f08f;
+    font-weight: 600;
 }
 
 

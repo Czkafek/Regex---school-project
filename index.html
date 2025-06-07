@@ -79,18 +79,18 @@
         function findText() {
             let searchText = document.f3.searchText.value;
             let searchPhrase = document.f3.searchPhrase.value;
-            const reg = new RegExp(`\\b${searchPhrase}\\b`, "gi");
+            const reg = new RegExp(`${searchPhrase}`, "gi");
             let result = searchText.match(reg);
             output = document.getElementById("output3");
             if(result !== null)
-                output.innerHTML = `Podana fraza występuje w tekście ${result.length} razy`;
+                output.innerHTML = `Podana fraza występuje w tekście <b>${result.length} razy</b>`;
             else
-                output.innerHTML = 'Podana fraza nie występuje w tekście';
+                output.innerHTML = 'Podana fraza <b>nie występuje</b> w tekście';
         }
         function markText() {
             let searchText = document.f4.searchText.value;
             let markPhrase = document.f4.markPhrase.value;
-            const reg = new RegExp(`\\b${markPhrase}\\b`, "gi");
+            const reg = new RegExp(`${markPhrase}`, "gi");
             let result = searchText.replace(reg, `<span>${markPhrase}</span>`);
             output = document.getElementById("output4");
             output.innerHTML = result;
